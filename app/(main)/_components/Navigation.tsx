@@ -3,7 +3,7 @@
 import {ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash} from "lucide-react";
 import React, {ElementRef, useEffect, useRef, useState} from "react";
 import {useMediaQuery} from "usehooks-ts";
-import {usePathname} from "next/navigation";
+import {useParams, usePathname} from "next/navigation";
 import {cn} from "@/lib/utils";
 import {UserItem} from "@/app/(main)/_components/User-Item";
 import {useMutation} from "convex/react";
@@ -19,10 +19,12 @@ import {
 import {TrashBox} from "@/app/(main)/_components/Trash-Box";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
+import Navbar from "@/app/(main)/_components/Navbar";
 
 export const Navigation = () => {
-    const settings = useSettings()
-    const search = useSearch()
+    const settings = useSettings();
+    const search = useSearch();
+    const params = useParams();
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)");
     const create = useMutation(api.documents.create)
@@ -184,9 +186,16 @@ export const Navigation = () => {
                     isMobile && "left-0 w-full"
                 )}
             >
-                <nav className="bg-transparent px-3 py-2 w-full">
-                    {isCollapsed && <MenuIcon onClick={resetWidth} role="button" className="h-6 w-6 text-muted-foreground" />}
-                </nav>
+                {!!params.documentId ? (
+                    <Navbar
+                        isCollapsed={isCollapsed}
+                        onResetWidth={resetWidth}
+                    />
+                ) : (
+                    <nav className="bg-transparent px-3 py-2 w-full">
+                        {isCollapsed && <MenuIcon onClick={resetWidth} role="button" className="h-6 w-6 text-muted-foreground" />}
+                    </nav>
+                )}
             </div>
         </>
     )
