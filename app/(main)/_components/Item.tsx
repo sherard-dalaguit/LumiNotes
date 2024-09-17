@@ -95,7 +95,7 @@ export const Item = ({id, label, onClick, icon: Icon, active, documentIcon, isSe
             {!!id && (
                 <div
                     role="button"
-                    className="h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 mr-1"
+                    className="h-full rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 mr-1"
                     onClick={handleExpand}
                 >
                     <ChevronIcon
