@@ -2,15 +2,17 @@
 
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { useCreateBlockNote } from "@blocknote/react";
-import "@blocknote/shadcn/style.css";
+import "@blocknote/core/style.css";
 import { BlockNoteView } from "@blocknote/shadcn";
 import { useTheme } from "next-themes";
+import { useEdgeStore } from "@/lib/edgestore";
+import "./editor_style.css"
+
 interface EditorProps {
     onChange?: (value: string) => void;
     initialContent?: string;
     editable?: boolean;
 }
-import { useEdgeStore } from "@/lib/edgestore";
 
 const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
     const { resolvedTheme } = useTheme();
@@ -32,15 +34,19 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
         if (onChange) {
             onChange(JSON.stringify(editor.document, null, 2));
         }
-    }                 ;
+    };
+
+    const className = resolvedTheme === "dark" ? "dark-mode" : "";
 
     return (
+        <div className={`blocknote-view ${className}`}>
         <BlockNoteView
             onChange={uploadToDatabase}
             editor={editor}
             editable={editable}
             theme={resolvedTheme === "dark" ? "dark" : "light"}
         />
+        </div>
     );
 };
 
