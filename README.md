@@ -120,6 +120,10 @@ To run the project locally, follow these steps:
 - **Integration with Convex**: Leverage Convex for backend services, enabling efficient data synchronization, serverless functions, and scalable infrastructure to support LumiNotes' features.
 
 
+## Future Improvements
+- **Dark Mode**: Will fix a bug in the dark mode editor, which currently has a dark navy background, opposed to the overall dark grey theme.
+
+
 ## Contact
 
 **Sherard Dalaguit**  
