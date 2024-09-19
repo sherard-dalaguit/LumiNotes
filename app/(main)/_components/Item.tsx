@@ -42,7 +42,8 @@ export const Item = ({id, label, onClick, icon: Icon, active, documentIcon, isSe
         event.stopPropagation()
         if (!id) return;
 
-        const promise = archive({ id });
+        const promise = archive({ id })
+            .then(() => router.push("/documents"));
         toast.promise(promise, {
             loading: "Moving to trash...",
             success: "Note moved to trash!",
@@ -68,7 +69,7 @@ export const Item = ({id, label, onClick, icon: Icon, active, documentIcon, isSe
                 if (!expanded) {
                     onExpand?.();
                 }
-                // router.push(`/documents/${documentId}`);
+                router.push(`/documents/${documentId}`);
             });
         toast.promise(promise, {
             loading: "Creating a new note...",
