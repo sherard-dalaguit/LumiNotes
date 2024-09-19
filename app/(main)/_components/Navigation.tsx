@@ -42,7 +42,7 @@ export const Navigation = () => {
         } else {
             resetWidth();
         }
-    }, [isMobile]);
+    }, [resetWidth, isMobile]);
 
     useEffect(() => {
         if (isMobile) {
